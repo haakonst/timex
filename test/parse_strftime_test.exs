@@ -77,6 +77,7 @@ defmodule DateFormatTest.ParseStrftime do
   test "parse century" do
     date = Timex.to_naive_datetime({{1915, 7, 13}, {0, 0, 0}})
     assert {:ok, ^date} = parse("13-07-15-19", "%d-%m-%y-%C")
+    assert {:ok, ^date} = parse("1915-07-13", "%C%y-%m-%d")
   end
 
   defp parse(date, fmt) do

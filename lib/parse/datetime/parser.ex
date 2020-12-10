@@ -296,9 +296,15 @@ defmodule Timex.Parse.DateTime.Parser do
         %{date | :year => year_shifted}
 
       y when y in [:year2, :iso_year2] ->
-        {{y, _, _}, _} = :calendar.universal_time()
-        current_century = div(y, 100)
-        year_shifted = value + current_century * 100
+        century =
+          if year == 0 do
+            {{y, _, _}, _} = :calendar.universal_time()
+            div(y, 100)
+          else
+            div(year, 100)
+          end
+
+        year_shifted = value + century * 100
         %{date | :year => year_shifted}
 
       y when y in [:year4, :iso_year4] ->
