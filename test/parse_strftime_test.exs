@@ -74,6 +74,11 @@ defmodule DateFormatTest.ParseStrftime do
     assert Timex.parse!(input_datetime_str, "%B %d, %Y %r %Z", :strftime) == expected_datetime
   end
 
+  test "parse century" do
+    date = Timex.to_naive_datetime({{1915, 7, 13}, {0, 0, 0}})
+    assert {:ok, ^date} = parse("13-07-15-19", "%d-%m-%y-%C")
+  end
+
   defp parse(date, fmt) do
     Timex.parse(date, fmt, :strftime)
   end

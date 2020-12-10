@@ -51,6 +51,7 @@ defmodule DateFormatTest.ParseDefault do
     assert {:ok, ^date0000} = parse("0", "{C}")
     assert {:ok, ^date0000} = parse("00", "{0C}")
     assert {:ok, ^date0000} = parse(" 0", "{_C}")
+    assert {:ok, ^date1900} = parse("01-01-00-19", "{0D}-{0M}-{0YY}-{0C}")
   end
 
   test "parse month" do
